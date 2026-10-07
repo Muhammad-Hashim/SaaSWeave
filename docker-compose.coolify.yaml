@@ -1,9 +1,9 @@
-name: saasweave
+name: agentsurf
 
 x-app-env: &app-env
   VITE_SERVER_URL: ${SERVICE_URL_SERVER}
   VITE_WEB_URL: ${SERVICE_URL_WEB}
-  DATABASE_URL: postgresql://${SERVICE_USER_POSTGRESQL}:${SERVICE_PASSWORD_POSTGRESQL}@postgres:5432/${POSTGRES_DB:-saasweave}
+  DATABASE_URL: postgresql://${SERVICE_USER_POSTGRESQL}:${SERVICE_PASSWORD_POSTGRESQL}@postgres:5432/${POSTGRES_DB:-agentsurf}
   BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set BETTER_AUTH_SECRET in your environment (vp run auth:secret)}
   NODE_ENV: production
   SOURCE_COMMIT: ${SOURCE_COMMIT:-}
@@ -34,9 +34,9 @@ x-server-env: &server-env
   ENABLE_OPEN_API_DOCS: ${ENABLE_OPEN_API_DOCS:-false}
   PLATFORM_ADMIN_EMAILS: ${PLATFORM_ADMIN_EMAILS:?Set at least one platform administrator email}
   REDIS_URL: redis://redis:6379/0
-  CACHE_PREFIX: ${CACHE_PREFIX:-saasweave}
+  CACHE_PREFIX: ${CACHE_PREFIX:-agentsurf}
   CACHE_DEFAULT_TTL_SECONDS: ${CACHE_DEFAULT_TTL_SECONDS:-300}
-  QUEUE_PREFIX: ${QUEUE_PREFIX:-saasweave}
+  QUEUE_PREFIX: ${QUEUE_PREFIX:-agentsurf}
   WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-5}
   STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
   STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
@@ -72,7 +72,7 @@ x-server-env: &server-env
 
 services:
   migrate:
-    container_name: saasweave-migrate
+    container_name: agentsurf-migrate
     build:
       context: .
       dockerfile: apps/server/Dockerfile
@@ -86,7 +86,7 @@ services:
     restart: "no"
 
   server:
-    container_name: saasweave-server
+    container_name: agentsurf-server
     restart: unless-stopped
     <<: *production-container
     build:
@@ -118,7 +118,7 @@ services:
         condition: service_completed_successfully
 
   web:
-    container_name: saasweave-web
+    container_name: agentsurf-web
     restart: unless-stopped
     <<: *production-container
     build:
@@ -151,7 +151,7 @@ services:
         condition: service_healthy
 
   worker:
-    container_name: saasweave-worker
+    container_name: agentsurf-worker
     restart: unless-stopped
     <<: *production-container
     build:
@@ -183,18 +183,18 @@ services:
 
   minio:
     image: minio/minio:RELEASE.2025-04-22T22-12-26Z
-    container_name: saasweave-minio
+    container_name: agentsurf-minio
     restart: unless-stopped
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: ${MINIO_ACCESS_KEY_ID:?Set MINIO_ACCESS_KEY_ID}
       MINIO_ROOT_PASSWORD: ${MINIO_SECRET_ACCESS_KEY:?Set MINIO_SECRET_ACCESS_KEY}
     volumes:
-      - saasweave-minio-data:/data
+      - agentsurf-minio-data:/data
 
   minio-init:
     image: minio/mc:RELEASE.2025-04-16T18-13-26Z
-    container_name: saasweave-minio-init
+    container_name: agentsurf-minio-init
     depends_on:
       - minio
     entrypoint: >
@@ -212,7 +212,7 @@ services:
 
   imgproxy:
     image: darthsim/imgproxy:v3.28.0
-    container_name: saasweave-imgproxy
+    container_name: agentsurf-imgproxy
     restart: unless-stopped
     environment:
       IMGPROXY_BIND: ":8080"
@@ -227,14 +227,14 @@ services:
 
   postgres:
     image: postgres:18-alpine
-    container_name: saasweave-postgres
+    container_name: agentsurf-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${SERVICE_USER_POSTGRESQL}
       POSTGRES_PASSWORD: ${SERVICE_PASSWORD_POSTGRESQL}
-      POSTGRES_DB: ${POSTGRES_DB:-saasweave}
+      POSTGRES_DB: ${POSTGRES_DB:-agentsurf}
     volumes:
-      - saasweave-pg-data:/var/lib/postgresql
+      - agentsurf-pg-data:/var/lib/postgresql
     healthcheck:
       test:
         - CMD-SHELL
@@ -245,11 +245,11 @@ services:
 
   redis:
     image: redis:8-alpine
-    container_name: saasweave-redis
+    container_name: agentsurf-redis
     restart: unless-stopped
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
-      - saasweave-redis-data:/data
+      - agentsurf-redis-data:/data
     healthcheck:
       test:
         - CMD
@@ -260,6 +260,6 @@ services:
       retries: 10
 
 volumes:
-  saasweave-pg-data:
-  saasweave-redis-data:
-  saasweave-minio-data:
+  agentsurf-pg-data:
+  agentsurf-redis-data:
+  agentsurf-minio-data:

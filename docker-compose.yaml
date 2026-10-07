@@ -1,9 +1,9 @@
-name: saasweave
+name: agentsurf
 
 x-app-env: &app-env
   VITE_SERVER_URL: ${VITE_SERVER_URL:-http://localhost:5000/server}
   VITE_WEB_URL: ${VITE_WEB_URL:-http://localhost:3000}
-  DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-saasweave}
+  DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-agentsurf}
   BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set BETTER_AUTH_SECRET in .env.docker (vp run auth:secret)}
   NODE_ENV: ${NODE_ENV:-production}
   SOURCE_COMMIT: ${SOURCE_COMMIT:-}
@@ -14,16 +14,16 @@ x-server-env: &server-env
   PLATFORM_ADMIN_EMAILS: ${PLATFORM_ADMIN_EMAILS:-}
   REQUIRE_EMAIL_VERIFICATION: ${REQUIRE_EMAIL_VERIFICATION:-false}
   REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
-  CACHE_PREFIX: ${CACHE_PREFIX:-saasweave}
+  CACHE_PREFIX: ${CACHE_PREFIX:-agentsurf}
   CACHE_DEFAULT_TTL_SECONDS: ${CACHE_DEFAULT_TTL_SECONDS:-300}
-  QUEUE_PREFIX: ${QUEUE_PREFIX:-saasweave}
+  QUEUE_PREFIX: ${QUEUE_PREFIX:-agentsurf}
   WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-5}
   STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
   STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
   STRIPE_PRICES: ${STRIPE_PRICES:-{}}
   STRIPE_METERS: ${STRIPE_METERS:-{}}
   MAIL_PROVIDER: ${MAIL_PROVIDER:-console}
-  MAIL_FROM: ${MAIL_FROM:-SaaSWeave <hello@saasweave.io>}
+  MAIL_FROM: ${MAIL_FROM:-AgentSurf <hello@agentsurf.io>}
   RESEND_API_KEY: ${RESEND_API_KEY:-}
   SMTP_URL: ${SMTP_URL:-}
   GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
@@ -53,7 +53,7 @@ x-server-env: &server-env
 
 services:
   migrate:
-    container_name: saasweave-migrate
+    container_name: agentsurf-migrate
     build:
       context: .
       dockerfile: apps/server/Dockerfile
@@ -61,14 +61,14 @@ services:
     environment:
       <<: *server-env
     networks:
-      - saasweave-network
+      - agentsurf-network
     depends_on:
       postgres:
         condition: service_healthy
     restart: "no"
 
   server:
-    container_name: saasweave-server
+    container_name: agentsurf-server
     restart: unless-stopped
     build:
       context: .
@@ -91,7 +91,7 @@ services:
       timeout: 3s
       retries: 5
     networks:
-      - saasweave-network
+      - agentsurf-network
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -101,7 +101,7 @@ services:
         condition: service_completed_successfully
 
   web:
-    container_name: saasweave-web
+    container_name: agentsurf-web
     restart: unless-stopped
     build:
       context: .
@@ -132,13 +132,13 @@ services:
       timeout: 3s
       retries: 5
     networks:
-      - saasweave-network
+      - agentsurf-network
     depends_on:
       server:
         condition: service_healthy
 
   worker:
-    container_name: saasweave-worker
+    container_name: agentsurf-worker
     restart: unless-stopped
     build:
       context: .
@@ -158,7 +158,7 @@ services:
       retries: 5
       start_period: 45s
     networks:
-      - saasweave-network
+      - agentsurf-network
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -169,7 +169,7 @@ services:
 
   minio:
     image: minio/minio:RELEASE.2025-04-22T22-12-26Z
-    container_name: saasweave-minio
+    container_name: agentsurf-minio
     restart: unless-stopped
     command: server /data --console-address ":9001"
     environment:
@@ -179,9 +179,9 @@ services:
       - "127.0.0.1:${MINIO_PORT:-9000}:9000"
       - "127.0.0.1:${MINIO_CONSOLE_PORT:-9001}:9001"
     volumes:
-      - saasweave-minio-data:/data
+      - agentsurf-minio-data:/data
     networks:
-      - saasweave-network
+      - agentsurf-network
     healthcheck:
       test: ["CMD-SHELL", "curl -sf http://localhost:9000/minio/health/live || exit 1"]
       interval: 5s
@@ -191,7 +191,7 @@ services:
 
   minio-init:
     image: minio/mc:RELEASE.2025-04-16T18-13-26Z
-    container_name: saasweave-minio-init
+    container_name: agentsurf-minio-init
     depends_on:
       minio:
         condition: service_started
@@ -207,12 +207,12 @@ services:
       MINIO_ROOT_PASSWORD: ${MINIO_SECRET_ACCESS_KEY:-minioadmin}
       MINIO_BUCKET: ${MINIO_BUCKET:-uploads}
     networks:
-      - saasweave-network
+      - agentsurf-network
     restart: "no"
 
   imgproxy:
     image: darthsim/imgproxy:v3.28.0
-    container_name: saasweave-imgproxy
+    container_name: agentsurf-imgproxy
     restart: unless-stopped
     environment:
       IMGPROXY_BIND: ":8080"
@@ -225,22 +225,22 @@ services:
     ports:
       - "${IMGPROXY_PORT:-8080}:8080"
     networks:
-      - saasweave-network
+      - agentsurf-network
 
   postgres:
     image: postgres:18-alpine
-    container_name: saasweave-postgres
+    container_name: agentsurf-postgres
     restart: unless-stopped
     ports:
       - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
-      POSTGRES_DB: ${POSTGRES_DB:-saasweave}
+      POSTGRES_DB: ${POSTGRES_DB:-agentsurf}
     volumes:
-      - saasweave-pg-data:/var/lib/postgresql
+      - agentsurf-pg-data:/var/lib/postgresql
     networks:
-      - saasweave-network
+      - agentsurf-network
     healthcheck:
       test:
         - CMD-SHELL
@@ -251,15 +251,15 @@ services:
 
   redis:
     image: redis:8-alpine
-    container_name: saasweave-redis
+    container_name: agentsurf-redis
     restart: unless-stopped
     ports:
       - "127.0.0.1:${REDIS_PORT:-6379}:6379"
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
-      - saasweave-redis-data:/data
+      - agentsurf-redis-data:/data
     networks:
-      - saasweave-network
+      - agentsurf-network
     healthcheck:
       test:
         - CMD
@@ -274,7 +274,7 @@ services:
   sso-idp:
     profiles: ["sso-test"]
     image: kristophjunge/test-saml-idp:1.15
-    container_name: saasweave-sso-idp
+    container_name: agentsurf-sso-idp
     restart: unless-stopped
     ports:
       - "127.0.0.1:${SSO_IDP_PORT:-8081}:8080"
@@ -283,12 +283,12 @@ services:
       SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: ${SSO_TEST_SP_ACS_URL:-http://localhost:5000/server/auth/sso/saml2/sp/acs/local-saml}
       SIMPLESAMLPHP_SP_SINGLE_LOGOUT_SERVICE: ${SSO_TEST_SP_SLO_URL:-http://localhost:5000/server/auth/sso/saml2/sp/slo/local-saml}
     networks:
-      - saasweave-network
+      - agentsurf-network
 
 volumes:
-  saasweave-pg-data:
-  saasweave-redis-data:
-  saasweave-minio-data:
+  agentsurf-pg-data:
+  agentsurf-redis-data:
+  agentsurf-minio-data:
 
 networks:
-  saasweave-network:
+  agentsurf-network:
