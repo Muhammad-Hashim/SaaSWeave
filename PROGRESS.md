@@ -20,8 +20,7 @@ Release target: V1
 ## Next
 
 1. Verify V1-004/V1-005 in CI and fix any workspace/lockfile drift.
-2. **V1-010** Add AgentSurf run/task schema + migration.
-3. **V1-011** Implement run state-transition service.
+2. **V1-011** Implement run state-transition service.
 4. **V1-012** Add run API contracts / oRPC + OpenAPI surface.
 5. **V1-013** Create/get/list/cancel/retry procedures.
 6. Continue V1 execution order from `docs/product/10_Agent implementation/006_V1 task breakdown.md`.

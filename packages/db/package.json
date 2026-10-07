@@ -21,6 +21,7 @@
     "test:unit": "vp test"
   },
   "dependencies": {
+    "@agentsurf/execution": "workspace:*",
     "@saasweave/core": "workspace:*",
     "@saasweave/env": "workspace:*",
     "@saasweave/logger": "workspace:*",

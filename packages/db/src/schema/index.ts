@@ -28,3 +28,11 @@ export { mrrSnapshot } from "#@/schema/mrr-snapshot.schema";
 export { dataExportRequest } from "#@/schema/data-export-request.schema";
 export { batchJob, batchJobItem } from "#@/schema/batch-job.schema";
 export { platformAnalyticsDaily } from "#@/schema/platform-analytics-daily.schema";
+
+export {
+  agentBrowserProfile,
+  agentModelProfile,
+  agentRun,
+  agentRunAction,
+  agentRunArtifact
+} from "#@/schema/agent-run.schema";
