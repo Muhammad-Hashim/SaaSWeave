@@ -1,0 +1,86 @@
+# Documentation index
+
+Total files: 78
+
+- `00_Start here/000_How to use this documentation.md`
+- `00_Start here/001_Documentation lifecycle.md`
+- `00_Start here/002_Evidence and certainty rules.md`
+- `01_Discovery/000_Product brief.md`
+- `01_Discovery/001_Problem validation.md`
+- `01_Discovery/002_Success metrics.md`
+- `02_Research/000_Category and market research.md`
+- `02_Research/001_Competitor research.md`
+- `02_Research/002_Open source research.md`
+- `02_Research/003_Technical feasibility.md`
+- `02_Research/004_Build vs reuse decision.md`
+- `03_Product/000_Product requirements document.md`
+- `03_Product/001_User stories.md`
+- `03_Product/002_Functional requirements.md`
+- `03_Product/003_Non-functional requirements.md`
+- `03_Product/004_Business rules.md`
+- `03_Product/005_Edge case catalog.md`
+- `03_Product/006_Version scope matrix.md`
+- `04_Design and flows/000_Use case specifications.md`
+- `04_Design and flows/001_Run state machine.md`
+- `04_Design and flows/002_Sequence diagrams.md`
+- `04_Design and flows/003_UX screen specifications.md`
+- `04_Design and flows/004_End-to-end flows.md`
+- `05_Engineering/000_System architecture.md`
+- `05_Engineering/001_Database design.md`
+- `05_Engineering/002_API contract.md`
+- `05_Engineering/003_Background jobs.md`
+- `05_Engineering/004_Storage and files.md`
+- `05_Engineering/005_Browser runtime.md`
+- `05_Engineering/006_Model provider abstraction.md`
+- `05_Engineering/007_Observability.md`
+- `05_Engineering/008_Failure modes and recovery.md`
+- `05_Engineering/009_Event and audit catalog.md`
+- `05_Engineering/010_Repository structure.md`
+- `05_Engineering/011_Edge and serverless functions.md`
+- `06_Security and privacy/000_Threat model.md`
+- `06_Security and privacy/001_Authorization matrix.md`
+- `06_Security and privacy/002_Data privacy.md`
+- `06_Security and privacy/003_Secrets and credentials.md`
+- `06_Security and privacy/004_Browser isolation.md`
+- `07_Quality assurance/000_Test strategy.md`
+- `07_Quality assurance/001_Acceptance tests.md`
+- `07_Quality assurance/002_Browser compatibility matrix.md`
+- `07_Quality assurance/003_Load and reliability testing.md`
+- `08_Deployment and operations/000_Self-host deployment.md`
+- `08_Deployment and operations/001_Backup restore.md`
+- `08_Deployment and operations/002_Upgrade and rollback.md`
+- `08_Deployment and operations/003_Production topology.md`
+- `08_Deployment and operations/004_Configuration reference.md`
+- `09_Roadmap and decisions/000_V1 V2 V3 roadmap.md`
+- `09_Roadmap and decisions/001_Decision log.md`
+- `09_Roadmap and decisions/002_Traceability matrix.md`
+- `09_Roadmap and decisions/003_Timeline and milestones.md`
+- `09_Roadmap and decisions/004_Post V3 backlog.md`
+- `10_Agent implementation/000_Agent execution contract.md`
+- `10_Agent implementation/001_Progress ledger.md`
+- `10_Agent implementation/002_Task specification template.md`
+- `10_Agent implementation/003_Master research prompt.md`
+- `10_Agent implementation/004_Master implementation prompt.md`
+- `10_Agent implementation/005_PR and branch workflow.md`
+- `10_Agent implementation/006_V1 task breakdown.md`
+- `11_Checklists/000_Pre-build completeness checklist.md`
+- `11_Checklists/001_V1 release checklist.md`
+- `11_Checklists/002_Security release checklist.md`
+- `11_Checklists/003_Deployment checklist.md`
+- `11_Checklists/004_Document completeness rubric.md`
+- `12_Examples/000_API examples.md`
+- `12_Examples/001_Docker compose example.md`
+- `12_Examples/002_Task run examples.md`
+- `12_Examples/003_Webhook examples.md`
+- `12_Examples/004_SDK usage examples.md`
+- `AGENTS.md`
+- `PRODUCT_DOCUMENTATION_FULL.md`
+- `README.md`
+- `SOURCES.md`
+- `TEMPLATE_MAPPING.md`
+- `V1_V2_V3_SUMMARY.md`
+
+## Live implementation tracking
+
+- `PROGRESS.md` — canonical current/done/next task ledger.
+- `10_Agent implementation/006_V1 task breakdown.md` — complete V1 task plan.
