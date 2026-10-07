@@ -13,17 +13,17 @@ export const appConfig = Object.freeze({
     locales
   },
   site: {
-    author: "SaaSWeave",
+    author: "AgentSurf",
     basePath: new URL(ENV_WEB_ISOMORPHIC.VITE_WEB_URL).pathname,
     baseUrl: new URL(ENV_WEB_ISOMORPHIC.VITE_WEB_URL).origin,
     description:
-      "SaaSWeave is the operations console for AI-native businesses: an enterprise dashboard, real-time AI usage analytics, and usage-based billing in one workspace.",
+      "AgentSurf is the self-hosted execution platform for production AI web agents: run browser tasks, inspect every step, and keep sessions and data under your control.",
     emailSupport,
     jurisdictionCountry: "Denmark",
-    longName: "SaaSWeave — Enterprise console for AI usage, analytics, and billing",
+    longName: "AgentSurf — Self-hosted execution platform for AI web agents",
     serverLocation: "the EU (Frankfurt)",
-    shortName: "SaaSWeave",
-    tagline: "Run your niche on numbers.",
+    shortName: "AgentSurf",
+    tagline: "Give your agents a browser you control.",
     url: ENV_WEB_ISOMORPHIC.VITE_WEB_URL,
     version: __BUILD_SOURCE_COMMIT__
   }

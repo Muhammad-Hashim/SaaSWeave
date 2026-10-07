@@ -8,7 +8,7 @@
  * config.
  *
  * The template ships intentionally generic ("workspace", "customer", "product")
- * so it fits whatever SaaSWeave turns out to be: a software product, an API, a
+ * so it fits AgentSurf as a self-hosted browser-agent product, API, or a
  * seat-based tool, or a usage-metered service.
  */
 

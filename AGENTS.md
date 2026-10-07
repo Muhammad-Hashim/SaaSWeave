@@ -1,6 +1,8 @@
-# saasweave
+# AgentSurf
 
-Opinionated full-stack TypeScript monorepo: TanStack Start + Hono + oRPC + Drizzle + Better Auth + Paraglide.js, powered by Vite Plus.
+AgentSurf is a self-hosted AI browser-agent platform built on the existing full-stack TypeScript monorepo: TanStack Start + Hono + oRPC + Drizzle + Better Auth + BullMQ + Redis, powered by Vite Plus.
+
+For AgentSurf product work, read `PROGRESS.md` and `docs/product/AGENTS.md` before coding. The legacy internal `@saasweave/*` package scope is being migrated atomically; do not create mixed partial namespace changes.
 
 Use Vite Plus commands in this repo: `vp` for package/scripts, `vpx` for one-off CLIs.
 

@@ -24,5 +24,5 @@ Accepted. Keeps integration language-neutral. UI uses same contracts.
 ## DEC-008 — No proxy/CAPTCHA network in V1
 Accepted. Adapter points only.
 
-## DEC-009 — Brand name deferred
-Accepted. Product behavior takes priority; working title remains descriptive.
+## DEC-009 — Product brand is AgentSurf
+Accepted. AgentSurf is the product name. The existing SaaSWeave codebase is the inherited foundation and its internal package scope will be migrated atomically rather than through partial imports.

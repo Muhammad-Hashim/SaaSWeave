@@ -1,6 +1,6 @@
 {
-  "short_name": "SaaSWeave",
-  "name": "SaaSWeave — AI usage, analytics & billing console",
+  "short_name": "AgentSurf",
+  "name": "AgentSurf — Self-hosted AI web-agent execution",
   "icons": [
     {
       "src": "favicon.ico",
