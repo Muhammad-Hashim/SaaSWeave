@@ -1,0 +1,32 @@
+# Configuration reference
+
+Representative environment variables:
+
+```text
+APP_URL=
+DATABASE_URL=
+REDIS_URL=
+MASTER_ENCRYPTION_KEY=
+ARTIFACT_DRIVER=local|s3
+ARTIFACT_LOCAL_PATH=
+S3_ENDPOINT=
+S3_BUCKET=
+S3_REGION=
+S3_ACCESS_KEY_ID=
+S3_SECRET_ACCESS_KEY=
+WORKER_CONCURRENCY=2
+RUN_DEFAULT_TIMEOUT_SECONDS=180
+RUN_DEFAULT_MAX_STEPS=30
+BLOCK_PRIVATE_NETWORKS=true
+ALLOWED_DOMAINS=
+DENIED_DOMAINS=
+SCREENSHOT_POLICY=on_error|steps|off
+RETENTION_RUN_DAYS=30
+RETENTION_ARTIFACT_DAYS=7
+WEBHOOK_SIGNING_SECRET=
+LOG_LEVEL=info
+```
+
+## Rule
+
+Every configuration key must have documented default, validation, sensitivity classification and restart/reload behavior.
